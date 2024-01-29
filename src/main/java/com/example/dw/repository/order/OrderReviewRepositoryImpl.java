@@ -62,8 +62,6 @@ public class OrderReviewRepositoryImpl implements OrderReviewRepositoryCustom {
 
 
 
-        System.out.println(counts);
-      System.out.println(contents.toString() + "입니다.");
 
         return new PageImpl<>(contents,pageable, counts);
     }

@@ -3,15 +3,12 @@ import * as page from './module/page.js';
 
 
 $(document).ready(function (){
-    console.log("리스트")
     let userId = $('.myfreeboardmain').data('userid');
-    console.log(userId);
     list.list(0,userId,'mypgs','myfreeBoardLists',showUserFreeboardList);
 
 // 리스트 클리시 세부 페이지 이동
     $('.list-content').on('click',function (){
         let id = $(this).data('id');
-        console.log((id));
         window.location.href = "/community/freeBoardDetail/"+id;
     })
 
@@ -25,7 +22,6 @@ function showUserFreeboardList(result) {
 
     console.log(result.length);
     if (result.content.length === 0) {
-        console.log("값이 없다")
         text = `
                     <div class="nonepage">
                         <div class="none-img-area">
@@ -42,7 +38,6 @@ function showUserFreeboardList(result) {
 
         $('.nonepage').css('display','block');
     }else{
-        console.log("값이 있다.")
         result.content.forEach(r => {
 
             text += ` <div class="list-content" th:data-id="${r.id}">
@@ -116,20 +111,16 @@ function showUserFreeboardList(result) {
         })
 
     }
-    console.log(text);
     textInput.html(text);
 
     let paginations = $('.pagination-ul');
-    console.log("페이징 실행!")
     page.pagination(result,paginations)
-    console.log("페이징 미실행!")
     paginations.find('a').on('click', function (e) {
         e.preventDefault();
         let userId = $('.myfreeboardmain').data('userid');
         const page = parseInt($(this).data('page'));
         list.list(page, userId,'mypgs','myfreeBoardLists',showUserFreeboardList);
     });
-    console.log("list~")
 
 
 }

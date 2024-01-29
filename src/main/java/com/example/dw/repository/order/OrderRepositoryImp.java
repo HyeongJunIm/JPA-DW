@@ -100,7 +100,6 @@ public class OrderRepositoryImp implements OrderRepositoryCustom{
                 .fetchOne();
 
 
-        System.out.println(counts);
 
 
         return new PageImpl<>(result, pageable,counts);

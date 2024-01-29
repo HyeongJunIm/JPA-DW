@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 public interface WalkingMateStateRepositoryCustom {
 
 
-//    Page<WalkMateMyApplicationListDto> findAllWalkingMateStateAndUserId(Pageable pageable, Long userId);
+
 
 
 

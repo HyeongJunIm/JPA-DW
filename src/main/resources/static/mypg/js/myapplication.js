@@ -5,7 +5,6 @@ import {listSearchDto} from "./module/list.js";
 
 $(document).ready(function (){
     let userId = $('.mateapplicationmain').data('userid');
-    console.log(userId);
     list.listSearchDto(0,userId,searchRecruitmentForm(),'mypgs','applicationwalkmate',showList);
 
 
@@ -13,7 +12,6 @@ $(document).ready(function (){
 
         let status = $(this).val();
         moveState(status);
-        console.log(status+"야옹~")
     });
 })
 
@@ -25,7 +23,6 @@ $(document).ready(function (){
 function searchRecruitmentForm(){
 
     let state = $("input[name='state']:checked").val();
-    console.log(state +"searchRecruitmentForm() ")
     return{
         state : state
 
@@ -36,7 +33,6 @@ function searchRecruitmentForm(){
 function moveState(state){
     let userId = $('.mateapplicationmain').data('userid'); // 데이터 불러오기위한 클래스 확인
     searchRecruitmentForm().state = state;
-    console.log( searchRecruitmentForm().state + " moveState");
     list.listSearchDto(0,userId,searchRecruitmentForm(),'mypgs','applicationwalkmate',showList);
 }
 
@@ -120,7 +116,6 @@ function showList(result){
     paginations.find('a').on('click', function (e) {
         e.preventDefault();
         const page = parseInt($(this).data('page'));
-        console.log(page);
         let userId = $('.mateapplicationmain').data('userid');
         searchRecruitmentForm.state=$("input[name='state']:checked").val()
         list.listSearchDto(page,userId, searchRecruitmentForm(),'mypgs','applicationwalkmate', showList)

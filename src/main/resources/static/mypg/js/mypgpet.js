@@ -2,7 +2,6 @@
 $('document').ready(function(){
     let petlist=$('.pet-detail-area');
     let list=petlist.length;
-    console.log(list);
     if(list >= 3){
         $('.addbtn').css('display','none');
     }else{
@@ -10,10 +9,8 @@ $('document').ready(function(){
     }
 
     let petId =$('.x-box').data('petid');
-    console.log(petId);
 
     let userId = $('.petmain').data('userid');
-    console.log(userId);
 
 
 })
@@ -21,7 +18,6 @@ $('document').ready(function(){
 /* 날짜 및 나이 계산 코드*/
 $('document').ready(function(){
 let petdetailarea =$('.pet-detail-area');
-console.log(petdetailarea.length);
 for(let i =0; i<petdetailarea.length; i++){
     // i번째 기입된 날짜를 불러와서 저장
     let pet = $('.pet-brith',petdetailarea[i]);
@@ -56,7 +52,6 @@ if (petDateMatch) {
       
     }
     $('.pet-age', petdetailarea[i]).text(ageDifference);
-    console.log(ageDifference);    
 } else {
     console.log('날짜 형식이 유효하지 않습니다.');
 }
@@ -66,9 +61,7 @@ if (petDateMatch) {
 // 수정하기 위해서 칸을 클릭시 쿼리스크링으로 같이 이동하는 스크립트
 $('.pet-detail-info').on('click',function(){
     let petId = $(this).data('petnum');
-    console.log(petId);
     let userId = $('.petmain').data('userid');
-    console.log(userId);
     window.location.href=`/mypg/petupdate/${petId}?userId=${userId}`;
 
 
@@ -79,9 +72,7 @@ $('.pet-detail-info').on('click',function(){
 //x버튼 클릭시 데이터 삭제 
 $('.x-box span').on('click',function(){
     let userId = $('.petmain').data('userid');
-    console.log(userId);
     let petId = $(this).data('petid');
-    console.log(petId);
 
     if(confirm("삭제 하시겠습니까?")) {
         $.ajax({
@@ -94,9 +85,7 @@ $('.x-box span').on('click',function(){
             contentType: 'application/json; charset=utf-8',
 
             success: function () {
-                console.log(userId + "@@@@@@@@@@")
 
-                console.log(petId);
                 alert("삭제가 완료되었습니다.");
                 window.location.href = `/mypg/mypet/${userId}`;
             }, error: function (a, b, c) {

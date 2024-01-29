@@ -36,7 +36,6 @@ public interface WalkingMateRepositoryCustom {
     //메인페이지 산책글 리스트
     List<IndexWalkMateDto> IndexWalkMateList();
 
-//    //산책글 작성확인(1일1회)
-//    Long limitWriteByDay(Long userId);
+
 
 }

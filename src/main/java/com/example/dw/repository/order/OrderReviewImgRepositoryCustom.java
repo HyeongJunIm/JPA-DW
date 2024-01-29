@@ -7,7 +7,6 @@ import com.example.dw.domain.dto.order.OrderReviewImgDto;
 import java.util.List;
 
 public interface OrderReviewImgRepositoryCustom {
-//
     List<OrderReviewImgDto> findReviewImgById(Long id);
 
 }

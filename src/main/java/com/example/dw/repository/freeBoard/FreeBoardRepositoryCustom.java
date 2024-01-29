@@ -17,9 +17,7 @@ public interface FreeBoardRepositoryCustom {
 
     //자유게시판 이미지 조회
     List<FreeBoardImgDto> findFreeBoardImgByFreeBoardId(Long freeBoardId);
-//
-//    // 마이 페이지 내가 작성한 게시판 리스트 뽑기
-//    Page<MyFreeBoardResultListDto> findAllById(Pageable pageable,Long userId);
+
 
     //자유게시판 인기글 뽑기
     List<FreeBoardDto> findFreeBoardRankByIdId();

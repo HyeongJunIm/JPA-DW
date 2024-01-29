@@ -2,9 +2,7 @@ import * as list from './module/list.js';
 import * as page from './module/page.js';
 
 $(document).ready(function (){
-    console.log("리스트")
     let userId = $('.qnamain').data('userid');
-    console.log(userId);
     list.list(0,userId,'mypgs','myWriteList',showUserQnAList);
 
 
@@ -17,7 +15,6 @@ function showUserQnAList(result) {
 
     console.log(result.length);
     if (result.content.length === 0) {
-        console.log("값이 없다")
         text = `
                     <div class="nonepage">
                         <div class="none-img-area">
@@ -34,7 +31,6 @@ function showUserQnAList(result) {
 
         $('.nonepage').css('display','block');
     }else{
-        console.log("값이 있다.")
         result.content.forEach(r => {
 
             text += `<div class="list-content" th:value="${r.id}">
@@ -98,20 +94,16 @@ function showUserQnAList(result) {
         })
 
     }
-    console.log(text);
     textInput.html(text);
 
     let paginations = $('.list-pagestion');
-    console.log("페이징 실행!")
     page.pagination(result,paginations)
-    console.log("페이징 미실행!")
     paginations.find('a').on('click', function (e) {
         e.preventDefault();
         let userId = $('.qnamain').data('userid');
         const page = parseInt($(this).data('page'));
         list.list(page, userId,'mypgs','myWriteList', showUserQnAList);
     });
-    console.log("list~")
 
 
 }

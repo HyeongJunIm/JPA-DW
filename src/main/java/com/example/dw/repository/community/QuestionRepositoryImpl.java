@@ -47,8 +47,7 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
     // qna 리스트 확인
     @Override
     public Page<QuestionListDto> findQnaListBySearch(Pageable pageable, SearchForm searchForm) {
-        //검색어
-        System.out.println(getDynamicSort(searchForm) + "여기닷!");
+
 
         BooleanExpression keywordTitle = qnatitleEq(searchForm.getKeyword());
 
@@ -102,7 +101,6 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 
         for(Tuple tuple : contents){
             Long queId = tuple.get(question.id);
-            System.out.println(queId+"조건 번호");
             if(!result.stream().anyMatch(
                     dto -> dto.getId().equals(queId))){
 
@@ -128,10 +126,9 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
                 result.add(questionListDto);
 
             }
-            System.out.println(tuple.toString()+"  댓글수 입니다.");
+
         }
 
-        System.out.println(result+"@@@@@@@@@@@@@");
 
         return new PageImpl<>(result, pageable, count);
     }
@@ -273,7 +270,6 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 
         for(Tuple tuple : contents){
             Long queId = tuple.get(question.id);
-//            System.out.println(queId+"조건 번호");
             if(!result.stream().anyMatch(
                     dto -> dto.getId().equals(queId))){
 
@@ -304,7 +300,6 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 
         }
 
-//        System.out.println(result+"@@@@@@@@@@@@@");
 
         return new PageImpl<>(result, pageable, count);
 
@@ -328,26 +323,21 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 
     }
 
-    // 댓글수 조회
-//    private Long getComment(Long questionId){
-//
-//    }
 
-
-
-    // qnaList 라디오 버튼 
+    /**
+     * 페이지 라이오 버튼에 따라 동적으로 해당 내용 조회
+     * @param searchForm
+     * @return
+     */
     private OrderSpecifier<?> getDynamicSort(SearchForm searchForm) {
 
 
         switch (searchForm.getCate()) {
             case "questionRd":
-                System.out.println("questionRd 여기로 왔다");
                 return question.questionRd.desc();
             case "commentCount":
-                System.out.println("commentCount 여기로 왔다");
                 return question.questionComment.size().desc();
             case "questionViewCount":
-                System.out.println("questionViewCount 여기로 왔다");
                 return question.questionViewCount.desc();
             default:
                 return question.questionRd.desc();

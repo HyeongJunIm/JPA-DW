@@ -105,7 +105,6 @@ public class MypageApiController {
             throw new IllegalArgumentException("폰 번혼 누락");
 
         }
-        System.out.println("기입된 전화번호 : " + userPhone);
         if (mypageService.existsByUserPhone(userPhone) == true) {
             return false;
         } else {
@@ -120,12 +119,9 @@ public class MypageApiController {
             throw new IllegalArgumentException("폰 번혼 누락");
 
         }
-        System.out.println("기입된 닉네임 : " + userNickName);
         if (mypageService.existsByUserNickName(userNickName) == true) {
-            System.out.println("여기입니다.");
             return false;
         } else {
-            System.out.println("true입니다.");
             return true;
         }
     }
@@ -139,8 +135,7 @@ public class MypageApiController {
             throw new IllegalArgumentException("누락");
 
         }
-        System.out.println("기입된 닉네임 : " + name);
-        System.out.println("조회 아이디 : " + userId);
+
         if (mypageService.existsByPetName(name, userId) == true) {
             return false;
         } else {
@@ -151,11 +146,7 @@ public class MypageApiController {
 
     @PostMapping("/mypgs/remove/{petId}")
     public void petInfoDelete(@PathVariable("petId") Long petId) {
-        System.out.println("[삭제 펫 정보 ] :" + petId);
         mypageService.removePet(petId);
-
-        System.out.println(petId + "정보사 삭제되었습니다.");
-
 
     }
 
@@ -163,9 +154,7 @@ public class MypageApiController {
     public Page<QuestionListDto> findQnAList(
             @PathVariable("page") int page, @PathVariable("userId") Long userId) {
         Pageable pageable = PageRequest.of(page, 5);
-        System.out.println(page + "페이지 번호");
         Page<QuestionListDto> result = questionRepositoryCustom.findQnaListById(pageable, userId);
-        System.out.println(result.toString() + "안뇽");
 
 
         return result;
@@ -182,7 +171,6 @@ public class MypageApiController {
 
         Pageable pageable = PageRequest.of(page, 4);
         Page<WalkMateMyDetailListDto> result = walkingMateRepositoryCustom.findAllWalkMateAndUserId(pageable,searchRecruitmentForm, userId);
-        System.out.println(result);
         return result;
     }
 
@@ -193,7 +181,6 @@ public class MypageApiController {
 
         Pageable pageable = PageRequest.of(page, 4);
         Page<WalkMateMyApplicationListDto> result = walkingMateRepositoryCustom.findAllWalkMateStateAndUserId(pageable,searchRecruitmentForm ,userId);
-        result.forEach(r-> System.out.println(r.getWalkingMateTitle()+"이고"+r.getWalkingMateStateId()+"입니다."));
         return result;
     }
 
@@ -202,9 +189,6 @@ public class MypageApiController {
             @PathVariable("walkmatestateId") Long walkmatestateId
     ) {
         Integer state = mypageService.walkmatestateupdate(walkmatestateId);
-
-        System.out.println(state+ "입니다.");
-
         return  state;
     }
 
@@ -213,9 +197,6 @@ public class MypageApiController {
             @PathVariable("walkmatestateId") Long walkmatestateId
     ) {
         Integer state = mypageService.walkmatestatedown(walkmatestateId);
-
-        System.out.println(state+ "입니다.");
-
         return  state;
     }
 
@@ -224,20 +205,13 @@ public class MypageApiController {
             @PathVariable("walkingmateId") Long walkingmateId
     ){
         Long walkingmatestate = mypageService.walkingmatestateupdate(walkingmateId);
-
-        System.out.println(walkingmatestate+"입니다.");
-
         return walkingmatestate;
     }
 
     @GetMapping("/mypgs/orderList/{page}/{userId}")
     public Page<OrderListResultDto> orderList(@PathVariable("page") int page,@PathVariable("userId") Long userId){
         Pageable pageable =PageRequest.of(page,4);
-        System.out.println(page);
         Page<OrderListResultDto> result = orderRepositoryCustom.findAllbyId(pageable,userId) ;
-
-        result.forEach(r -> System.out.println(r.getUserId()+"의 주문내역은" + r +"입니다\n"));
-
         return result;
     }
 
@@ -256,14 +230,7 @@ public class MypageApiController {
 
     @PostMapping("/mypgs/deletereview/{id}")
     public void removeReview(@PathVariable("id")Long id){
-
-        System.out.println("[orderItemId 번호] : " + id);
-
         mypageService.removeReview(id);
-
-
-        System.out.println("완료");
-
     }
 
     @PostMapping("/mypgs/userRemove/{userId}")
@@ -272,7 +239,6 @@ public class MypageApiController {
             throw new IllegalArgumentException("회원번호가 없습니다.");
         }
         mypageService.removeUser(userId);
-        System.out.println("회원 탈퇴 완료!!");
     }
 
     @GetMapping("/mypgs/myfreeBoardLists/{page}/{userId}")
@@ -281,12 +247,8 @@ public class MypageApiController {
 
         Pageable pageable = PageRequest.of(page, 5);
 
-        System.out.println("userId: " + userId);
-
-        System.out.println("레파지토리로 들어간다!!");
         Page<MyFreeBoardResultDto> result = freeBoardRepositoryCustom.findByUserId(pageable,userId);
 
-        System.out.println(result.toString()+" 컨트롤러에서 가져온 데이터 입니다.");
 
         return result;
     }

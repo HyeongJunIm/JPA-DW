@@ -68,7 +68,6 @@ public class QnaService {
 
         //qna 기본내용 업데이트
         question.update(questionWritingForm);
-        System.out.println("서비스단 완료");
         return Optional.ofNullable(question).orElseThrow(()->{
             throw new IllegalArgumentException("조회 정보 없음");});
     }
@@ -77,15 +76,11 @@ public class QnaService {
     @Transactional
     public Question updateViewCount(Long questionId){
 
-        System.out.println(questionId+"번 게시물 조회수 증가");
 
         Question question = questionRepository.findById(questionId).get();
-        System.out.println(question.getQuestionViewCount()+"++");
         question.increaseViewCount();
-        System.out.println(question.getQuestionViewCount()+"변경된건 증가일뿐");
 
 
-        System.out.println(question.getQuestionViewCount()+"저장후 ");
         return  questionRepository.save(question);
     }
 

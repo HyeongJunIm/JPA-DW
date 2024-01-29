@@ -6,15 +6,12 @@ import * as date from "./module/form.js";
 
 $(document).ready(function (){
     let userId = $('.reviewlistmain').data('userid');
-    console.log(userId);
     list.list(0,userId,'mypgs','myreviewlist',showList);
 
     //날짜 포맷 변경
     let regDateString = $('#reviewRegisterdata').val();
-    console.log(regDateString);
 
     let formattedDateReg = date.formatDate(regDateString);
-    console.log($('.reviewRd').text(formattedDateReg));
     $('.reviewRd').text(formattedDateReg);
 
 
@@ -25,7 +22,6 @@ function showList(result){
     let text =``;
     let textinput =$('.list-contents-box');
 
-    console.log(result.content.length);
 
     if(result.content.length === 0){
 
@@ -90,7 +86,6 @@ function showList(result){
     }
 
     textinput.html(text);
-    console.log(text);
 
     let paginations = $('.pagination-ul');
     page.pagination(result, paginations)

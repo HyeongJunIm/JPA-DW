@@ -281,7 +281,6 @@ $(document).ready(function (){
 
         let status = $(this).val();
         moveState(status);
-        console.log(status+"야옹~")
     });
 
 

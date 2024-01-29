@@ -5,7 +5,6 @@ let $imgList = $('.img-list');
 // file change이벤트로 미리보기 갱신하기
 $input.on('change', function () {
     let files = this.files;
-      console.log(files);
 
     // 길이 체크함수 (files, 원하는 길이)
     let newFiles = checkLength(files, 3);
@@ -48,9 +47,7 @@ function checkLength(files, num) {
 // 이미지 수가 4개보다 적으면 기본이미지로 대체함
 function appendImg(files) {
     for (let i = 0; i < 3; i++) {
-        console.log(files.length)
         if (i < files.length) {
-            console.log(i+"번째 이미지")
             let src = URL.createObjectURL(files[i]);
 
             $imgList.eq(i).css('background-image', `url(${src})`).css('background-size', 'cover').data('name', `${files[i].name}`);
@@ -70,4 +67,3 @@ function appendImg(files) {
 }
 
 let orderItemId=$('.orderItemId').val
-console.log(orderItemId);

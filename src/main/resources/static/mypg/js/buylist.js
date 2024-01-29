@@ -88,12 +88,10 @@ function showList(result){
                     text += `</li>`;
             }
 
-        console.log(text);
         textinput.html(text);
 
     $('.order-date').each(function () {
         let date = $(this).find('.orderregisterdate').attr('value');
-        console.log(date);
         let dateReplace = form.formatDate(date);
         $(this).find('.orderregisterdate').text(dateReplace);
     });
@@ -117,6 +115,5 @@ function showList(result){
 
 
 function numberWithCommas(price) {
-    console.log(price);
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

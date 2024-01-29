@@ -16,8 +16,7 @@ $input.on('change', function () {
 // 클릭 이벤트로 이미지 지우고 미리보기 갱신하기
 $img.on('click', function (e) {
     let name = $(e.target).data('name');
-    console.log(e.target);
-    console.log(name);
+
     removeImg(name);
     updateImg($input[0].files);
     

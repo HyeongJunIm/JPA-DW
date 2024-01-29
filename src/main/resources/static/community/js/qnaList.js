@@ -94,7 +94,6 @@ function showQnaBoardList(result) {
 
 
         if(r.userFileId == 0){
-            console.log("여기다");
             text +=`   <div class="list-content-id-img">
                                          <img src= "/img/dogImg.jpg" alt="">
                                             </div>
@@ -157,7 +156,6 @@ function showQnaBoardList(result) {
             `;
     })
 
-    console.log($('.userName').text());
     textInput.html(text);
 
     let paginations = $('.list-pagestions');
@@ -168,7 +166,6 @@ function showQnaBoardList(result) {
         const page = parseInt($(this).data('page'));
         list.listSearchDto(page, searchQnaBoardForm(),'qnar','qnalist', showQnaBoardList);
     });
-    console.log("list~")
 }
 
 

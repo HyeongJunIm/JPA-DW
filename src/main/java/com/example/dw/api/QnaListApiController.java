@@ -50,12 +50,6 @@ public class QnaListApiController {
             @PathVariable("page") int page, SearchForm searchForm){
         Pageable pageable = PageRequest.of(page,5);
         Page<QuestionListDto> result = questionRepositoryCustom.findQnaListBySearch(pageable,searchForm);
-        System.out.println(result+"안뇽");
-        System.out.println(searchForm.getKeyword()+"검색 내용!");
-        System.out.println(searchForm.getCate()+"검색 내용!");
-        System.out.println("여기는 레스트");
-
-
 
         return result;
 
@@ -63,7 +57,6 @@ public class QnaListApiController {
 
     @PostMapping("/questionReply")
     public void registerQuestionReply(QuestionCommentForm questionCommentForm){
-        System.out.println(questionCommentForm);
         qnaService.register(questionCommentForm);
     }
 
@@ -85,7 +78,6 @@ public class QnaListApiController {
     @PatchMapping("/questionReply")
     public void modifyQuestionReply(QuestionCommentForm questionCommentForm){
 
-        System.out.println(questionCommentForm.toString());
 
         qnaService.modifyQuestionComment(questionCommentForm);
 

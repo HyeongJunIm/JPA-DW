@@ -1,24 +1,20 @@
 //파일 추가 코드
 let $input = $('#post-image');
 let $img = $('.img-area');
-// console.log($input);
 
 // file change이벤트로 미리보기 갱신하기
 $input.on('change', function () {
     let files = this.files;
-      console.log(files);
-      console.log("안녕");  
+
     // 길이 체크함수 (files, 원하는 길이)
     let newFiles = checkLength(files, 1);
-    console.log(newFiles);
     updateImg(newFiles);
 });
 
 // 클릭 이벤트로 이미지 지우고 미리보기 갱신하기
 $img.on('click', function (e) {
     let name = $(e.target).data('name');
-    console.log(e.target);
-    console.log(name);
+
     removeImg(name);
     updateImg($input[0].files);
 });
@@ -53,9 +49,7 @@ function updateImg(files) {
     for (let i = 0; i <= 1; i++) {
 
         if (i <= files.length) {
-            console.log(files.length);
             let src = URL.createObjectURL(files[i]);
-            console.log(src);
             $('.img').eq(i).attr('src', src).data('name', `${files[i].name}`);
 
             
@@ -77,19 +71,15 @@ function checkPetNameFormat() {
 
     $('.inp-name').keyup(function () {
         let nick = $(".inp-name").val();
-        console.log(nick);
         let reg =/^[가-힣a-zA-Z0-9]{1,10}$/;
 
         let nickCheck = reg.test(nick);
-        console.log(nickCheck);
 
 
         if(nickCheck) {
             $('.nonename').css("display", "none");
-            console.log("실행!");
         } else {
             $('.nonename').css("display", "block");
-            console.log("미실행!")
         }
 
     });
@@ -99,7 +89,6 @@ function checkPetNameFormat() {
 $('.inp-birth').on('input',function(){
     let inputDay = $(this).val().replace(/-/g,'');
     let reg = /^\d{8}$/;
-    console.log(inputDay);
     if(reg.test(inputDay)){
             inputDay = inputDay.slice(0,4) + '-' + inputDay.slice(4,6) +  '-' + inputDay.slice(6, 8);
         }else {
@@ -113,19 +102,15 @@ $('.inp-birth').on('input',function(){
 /*날짜 기입 유효성 검사 */ 
 $('.inp-birth').on('keyup',function () {
     let day = $(".inp-birth").val();
-    console.log(day);
     let reg =/^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 
     let dayCheck = reg.test(day);
     
-    console.log(dayCheck);
-    
+
     if(dayCheck) {
         $('.noneday').css("display", "none");
-        console.log("성공!");
     } else {
         $('.noneday').css("display", "block");
-        console.log("실패!")
     }
 
 });
@@ -160,35 +145,11 @@ function checkPetName() {
     })
 }
 
-/*등록 버튼 클릭시 확인 버튼 이벤트*/
-/* 기존에 등록되어 있던 체크 값 표시 */
 
-// function checkPoint(){
-//
-//     let genderMen =$('#gendertype-m');
-//     let genderWomen =$('#gendertype-f');
-//     let gendercheck = $('.gender-box');
-//     let neuterings=$('#neuter');
-//     let neuterBox = $('.neuter-box');
-//     if(genderMen.is(':checked')){
-//         console.log("남성 선택");
-//         gendercheck.eq(0).addClass('checked');
-//     }else if(genderWomen.is(':checked')){
-//         console.log("여성 선택");
-//         gendercheck.eq(1).addClass('checked');
-//     }
-//
-//     if(neuterings.is(':checked')){
-//         console.log("중성화 여부 체크");
-//         neuterBox.eq(0).addClass('checked');
-//     }
-// }
 
 $('document').ready(function(){
     checkPetNameFormat();
     checkPetName();
-    // checkPoint();
-    console.log("*****")
 
     let genderMen =$('#gendertype-m');
     let genderWomen =$('#gendertype-f');
@@ -196,15 +157,12 @@ $('document').ready(function(){
     let neuterings=$('#neuter');
     let neuterBox = $('.neuter-box');
     if(genderMen.is(':checked')){
-        console.log("남성 선택");
         gendercheck.eq(0).addClass('checked');
     }else if(genderWomen.is(':checked')){
-        console.log("여성 선택");
         gendercheck.eq(1).addClass('checked');
     }
 
     if(neuterings.is(':checked')){
-        console.log("중성화 여부 체크");
         neuterBox.eq(0).addClass('checked');
     }
 })

@@ -44,7 +44,6 @@ next.addEventListener('click', function () {
 $('.modify-btn').on('click',function (){
     let questionId = $(this).data('questionid');
 
-    console.log(questionId);
 
     window.location.href="/qna/modify/" + questionId;
 
@@ -53,7 +52,6 @@ $('.modify-btn').on('click',function (){
 $('.remove-btn').on('click',function (){
     let questionId =$(this).data('questionid');
 
-    console.log(questionId);
 
     window.location.href="/qna/delete/" + questionId;
 
@@ -102,9 +100,7 @@ function registerReply(){
     let questionCommentContent = $('#questioncomment').val();
     let questionId=$('#questionId').val();
     let userId = $('#userId').val();
-    console.log(questionCommentContent);
-    console.log(questionId);
-    console.log(userId);
+
 
     $.ajax({
         url : '/qnar/questionReply',

@@ -267,7 +267,12 @@ public class FreeBoardRepositoryImpl implements FreeBoardRepositoryCustom{
         return content;
     }
 
-
+    /**
+     * 로그인한 유저 마이페이지 자신이 작성한 글 조회
+     * @param pageable
+     * @param userId
+     * @return
+     */
     @Override
     public Page<MyFreeBoardResultDto> findByUserId(Pageable pageable, Long userId) {
         System.out.println(userId+ " 조회해야되는 아이디 입니다.");
