@@ -1,19 +1,19 @@
 package com.example.dw.repository.order;
 
 import com.example.dw.domain.dto.order.*;
-import com.example.dw.domain.entity.order.OrderItem;
+
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 import static com.example.dw.domain.entity.order.QOrders.orders;
 import static com.example.dw.domain.entity.user.QUsers.users;
 import static com.example.dw.domain.entity.order.QOrderItem.orderItem;
@@ -27,85 +27,70 @@ public class OrderRepositoryImp implements OrderRepositoryCustom{
 
     private final JPAQueryFactory jpaQueryFactory;
 
+    private final EntityManager em;
+
+
     @Override
-    public Page<OrderListResultDto> findAllbyId(Pageable pageable, Long userId) {
+    public Page<OrderListResultDto> findAllByMyOrderId(Pageable pageable,Long userId) {
 
-
-
-        List<OrderDto> content = jpaQueryFactory
-                .select(new QOrderDto(
+        List<OrderResultList> orderResultLists = jpaQueryFactory.
+                select(new QOrderResultList(
                         orders.id,
                         orders.orderRegisterDate,
                         users.id
-                ))
-                .from(orders)
-                .leftJoin(orders.users,users)
-                .where(orders.users.id.eq(userId))
-                .orderBy(orders.orderRegisterDate.desc())
+                )).from(orders)
+                .leftJoin(orders.users, users)
+                .where(users.id.eq(userId))
+                .orderBy(orders.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
 
 
-        List<OrderListResultDto> result =
-                content.stream().map(orderDto -> {
+        List<OrderItemDto> orderItemDtos = jpaQueryFactory
+                .select(new QOrderItemDto(
+                        orderItem.id,
+                        orderItem.orderPrice,
+                        orderItem.orderQuantity,
+                        goods.id,
+                        goods.goodsName,
+                        goodsMainImg.id,
+                        goodsMainImg.goodsMainImgName,
+                        goodsMainImg.goodsMainImgPath,
+                        goodsMainImg.goodsMainImgUuid,
+                        orderItem.state,
+                        orders.id
+                )).from(orderItem)
+                .leftJoin(orderItem.goods, goods)
+                .leftJoin(goods.goodsMainImg, goodsMainImg)
+                .fetch();
 
-                    List<OrderItemDto> orderItemDtos = jpaQueryFactory
-                            .select(new QOrderItemDto(
-                                    orderItem.id,
-                                    orderItem.orderQuantity,
-                                    orderItem.orderPrice,
-                                    orderItem.goods.id,
-                                    orderItem.goods.goodsName,
-                                    goodsMainImg.id,
-                                    goodsMainImg.goodsMainImgName,
-                                    goodsMainImg.goodsMainImgPath,
-                                    goodsMainImg.goodsMainImgUuid,
-                                    orderItem.state
+        List<OrderListResultDto> result = new ArrayList<>();
 
-                            ))
-                            .from(orderItem)
-                            .leftJoin(orderItem.goods.goodsMainImg,goodsMainImg)
-                            .where(orderItem.orders.id.eq(orderDto.getId()))
-                            .fetch();
+        for (OrderResultList orderResultList : orderResultLists) {
+            List<OrderItemDto> relatedOrderItems = orderItemDtos.stream()
+                    .filter(orderItemDto -> orderItemDto.getOrderId().equals(orderResultList.getOrderId()))
+                    .collect(Collectors.toList());
 
-                    List<OrderItemDto> orderItemDtoList = orderItemDtos.stream().map(
-                            orderItemDtoLists -> new OrderItemDto(
-                                    orderItemDtoLists.getId(),
-                                    orderItemDtoLists.getOrderQuantity(),
-                                    orderItemDtoLists.getOrderPrice(),
-                                    orderItemDtoLists.getGoodsid(),
-                                    orderItemDtoLists.getGoodsName(),
-                                    orderItemDtoLists.getGoodsMainImgId(),
-                                    orderItemDtoLists.getGoodsMainImgName(),
-                                    orderItemDtoLists.getGoodsMainImgPath(),
-                                    orderItemDtoLists.getGoodsMainImgUuid(),
-                                    orderItemDtoLists.getState()
-                            )).collect(toList());
+            OrderListResultDto orderListResultDto = new OrderListResultDto(
+                    orderResultList.getOrderId(),
+                    orderResultList.getOrderDate(),
+                    orderResultList.getUserId(),
+                    relatedOrderItems
+            );
 
-                    return new OrderListResultDto(
-                            orderDto.getId(),
-                            orderDto.getOrderRegisterDate(),
-                            orderDto.getUserId(),
-                            orderItemDtoList
-                    );
+            result.add(orderListResultDto);
 
-                }).collect(toList());
+        }
 
 
-        Long counts = jpaQueryFactory
-                .select(orders.id.count())
+        Long count = jpaQueryFactory.select(
+                orders.count())
                 .from(orders)
-                .where(orders.users.id.eq(userId))
+                .where(users.id.eq(userId))
                 .fetchOne();
 
 
-
-
-        return new PageImpl<>(result, pageable,counts);
-
+        return new PageImpl<>(result,pageable,count);
     }
-
-
-
 }

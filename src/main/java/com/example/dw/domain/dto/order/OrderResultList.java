@@ -10,22 +10,22 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class OrderListResultDto {
+public class OrderResultList {
 
 
-    //주문서 id
-    private Long id;
-    //주문서 등록 날짜
+    private Long orderId;
+
+
     private LocalDateTime orderDate;
 
     private Long userId;
 
-    private List<OrderItemDto> orderItemDto;
 
-    public OrderListResultDto(Long id, LocalDateTime orderDate, Long userId, List<OrderItemDto> orderItemDto) {
-        this.id = id;
+
+    @QueryProjection
+    public OrderResultList(Long orderId, LocalDateTime orderDate, Long userId) {
+        this.orderId = orderId;
         this.orderDate = orderDate;
         this.userId = userId;
-        this.orderItemDto = orderItemDto;
     }
 }

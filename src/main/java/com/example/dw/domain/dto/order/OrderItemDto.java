@@ -20,12 +20,12 @@ public class OrderItemDto {
     private String goodsMainImgPath;
     private String goodsMainImgUuid;
     private Long state =0L;
-
+    private Long orderId;
 
 
     @QueryProjection
 
-    public OrderItemDto(Long id, Integer orderQuantity, Integer orderPrice, Long goodsid, String goodsName, Long goodsMainImgId, String goodsMainImgName, String goodsMainImgPath, String goodsMainImgUuid, Long state) {
+    public OrderItemDto(Long id, Integer orderQuantity, Integer orderPrice, Long goodsid, String goodsName, Long goodsMainImgId, String goodsMainImgName, String goodsMainImgPath, String goodsMainImgUuid, Long state, Long orderId) {
         this.id = id;
         this.orderQuantity = orderQuantity;
         this.orderPrice = orderPrice;
@@ -36,5 +36,6 @@ public class OrderItemDto {
         this.goodsMainImgPath = goodsMainImgPath;
         this.goodsMainImgUuid = goodsMainImgUuid;
         this.state = state;
+        this.orderId = orderId;
     }
 }

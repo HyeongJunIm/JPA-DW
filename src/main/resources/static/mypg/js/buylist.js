@@ -47,7 +47,7 @@ function showList(result){
                                     <div class="buylistbox-overflow">
                           `;
 
-                                r.orderItemDtoList.forEach(e => {
+                                r.orderItemDto.forEach(e => {
 
                                 text += `
                                       

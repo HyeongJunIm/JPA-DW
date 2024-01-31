@@ -7,6 +7,7 @@ import com.example.dw.domain.dto.community.*;
 import com.example.dw.domain.dto.order.OrderItemDto;
 import com.example.dw.domain.dto.order.OrderItemReviewListDto;
 import com.example.dw.domain.dto.order.OrderListResultDto;
+import com.example.dw.domain.dto.order.OrderResultList;
 import com.example.dw.domain.form.QuestionCommentForm;
 import com.example.dw.domain.form.SearchRecruitmentForm;
 import com.example.dw.repository.community.QuestionRepositoryCustom;
@@ -211,7 +212,7 @@ public class MypageApiController {
     @GetMapping("/mypgs/orderList/{page}/{userId}")
     public Page<OrderListResultDto> orderList(@PathVariable("page") int page,@PathVariable("userId") Long userId){
         Pageable pageable =PageRequest.of(page,4);
-        Page<OrderListResultDto> result = orderRepositoryCustom.findAllbyId(pageable,userId) ;
+        Page<OrderListResultDto> result = orderRepositoryCustom.findAllByMyOrderId(pageable,userId) ;
         return result;
     }
 
@@ -252,6 +253,7 @@ public class MypageApiController {
 
         return result;
     }
+
 
 
 }
