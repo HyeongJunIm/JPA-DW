@@ -43,6 +43,12 @@ public class MypageController {
     private final OrderItemRepositoryCustom orderItemRepositoryCustom;
 
 
+    /**
+     * mypage main화면 user 기본정보 조회
+     * @param userId
+     * @param model
+     * @return
+     */
     @GetMapping("/main/{userId}")
     public String mypg(@PathVariable("userId")Long userId, Model model){
 
@@ -59,6 +65,12 @@ public class MypageController {
         return "/mypg/mypgmain";
     }
 
+    /**
+     * 회워정보 수정 페이지 user기본정보 조회
+     * @param userId
+     * @param model
+     * @return
+     */
     @GetMapping("/modify/{userId}")
     public String modifyPage(@PathVariable("userId") Long userId, Model model){
         if(userId ==null){
@@ -74,6 +86,14 @@ public class MypageController {
         return  "/mypg/userupdate";
     }
 
+    /**
+     * 수정내용 저장
+     * @param userId
+     * @param userUpdateForm 수정정보내용 저장 공간
+     * @param file user이미지
+     * @return
+     * @throws IOException
+     */
     @PutMapping("/modify/{userId}/register")
     public RedirectView modifyUser(@PathVariable("userId") Long userId,
                                    UserUpdateForm userUpdateForm,
@@ -92,7 +112,12 @@ public class MypageController {
         return new RedirectView("/mypg/main/{userId}");
     }
 
-
+    /**
+     * 나의 펫 리스트 페이지
+     * @param userId
+     * @param model
+     * @return
+     */
     @GetMapping("/mypet/{userId}")
     public String petList(@PathVariable("userId")Long userId,Model model){
 
@@ -109,7 +134,14 @@ public class MypageController {
         return "/mypg/registerpet";
     }
 
-
+    /**
+     * 펫 등록을 위한 페이지
+     * @param petForm 펫 정보를 저장하기위한 필드
+     * @param files 펫의 이미지를 저장하기위한 필드
+     * @param userId 해당 유저에세 펫을 저장 하기위한 필드
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/petregister")
     public String register(PetForm petForm,
                                  @RequestParam("petImg")List<MultipartFile> files,
@@ -124,7 +156,13 @@ public class MypageController {
 
     }
 
-
+    /**
+     * 수정 페이지 이동시 선택된 펫의 정보 조회
+     * @param petId 선택 펫 id
+     * @param userId
+     * @param model
+     * @return
+     */
     @GetMapping("/petupdate/{petId}")
     public String petupdatePage(@PathVariable("petId") Long petId,
             @RequestParam("userId") Long userId, Model model){
@@ -144,6 +182,14 @@ public class MypageController {
         return "/mypg/registerpetupdate";
     }
 
+    /**
+     * 펫의 정보 수정 저장
+     * @param petId 선택된 특정 펫 조회를 위한 필드
+     * @param petUpdateForm 펫의 새로운 정보 저장 필드
+     * @param files
+     * @return
+     * @throws IOException
+     */
     @PutMapping("/petmodify/{petId}")
     public RedirectView modifyUser(@PathVariable("petId") Long petId,
                                     PetUpdateForm petUpdateForm,

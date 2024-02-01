@@ -3,10 +3,25 @@ import * as page from './module/page.js';
 
 $(document).ready(function (){
     let userId = $('.qnamain').data('userid');
+    console.log(userId);
     list.list(0,userId,'mypgs','myWriteList',showUserQnAList);
+
+  $('.list-contents-box').on('click','.list-content',function (){
+        let id =$(this).data('id');
+        window.location.href="/qna/qnaDetail/"+id;
+
+  })
+
 
 
 })
+
+
+
+
+
+
+
 
 function showUserQnAList(result) {
     let text = '';
@@ -33,7 +48,7 @@ function showUserQnAList(result) {
     }else{
         result.content.forEach(r => {
 
-            text += `<div class="list-content" th:value="${r.id}">
+            text += `<div class="list-content" data-id="${r.id}">
                         <div class="list-content-title">${r.questionTitle}</div>
                         <div class="list-content-content">
                             <div  class="list-content-content-detail">

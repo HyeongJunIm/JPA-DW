@@ -219,11 +219,15 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
     }
 
 
-    // 특정 유저 작성글 마이 페이지에 조회
+    /**
+     * 내가 작성한 QnA글 조회 쿼리
+     * @param pageable
+     * @param userId 특정 유저 정보 필드
+     * @return
+     */
     @Override
     public Page<QuestionListDto> findQnaListById(Pageable pageable,Long userId) {
-        System.out.println(userId + "마이페이지 글 조회를 위한 유저아이디 번호입니다");
-        // 페이징을 위한 전체 데이터 수 조회
+
         Long count = getMypageCount(userId);
 
         List<Tuple> contents = jpaQueryFactory
@@ -264,7 +268,6 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
                 )
                 .fetch();
 
-        contents.forEach(r-> System.out.println(r.toString()+" 입니다."));
         List<QuestionListDto> result = new ArrayList<>();
 
 
@@ -293,9 +296,7 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
                         tuple.get(questionImg.questionImgName)
                 );
                 result.add(questionListDto);
-                System.out.println(questionListDto.getCommentCount()+"댓글수 입니다.");
-                System.out.println(questionListDto.getUserFileId()+"유저 파일 아이디 입니다.");
-                System.out.println(questionListDto.getRoute());
+
             }
 
         }
@@ -308,8 +309,11 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
     }
 
 
-
-    // 마이 페이지 조회
+    /**
+     * 페이징 처리를 위한 유저가 작성한 글 전체 갯수 조회
+     * @param userId
+     * @return
+     */
     private Long getMypageCount(Long userId){
 
         Long count = jpaQueryFactory

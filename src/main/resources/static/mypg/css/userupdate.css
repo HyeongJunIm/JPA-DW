@@ -397,3 +397,12 @@ input[type='file'] {
     padding-left: 10px;
     font-size: 13px;
 }
+
+.userPwCh span{
+    display: inline-block;
+    width: 400px;
+    padding-left: 10px;
+    padding-top: 3px;
+    font-size: 13px;
+    text-align: left;
+}

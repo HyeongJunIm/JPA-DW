@@ -48,7 +48,7 @@
                                 <div class="info-img"><img src="/img/dogImg02.jpg" alt=""></div>
                                 <div th:text="${question.userName}"></div>
                             </div>
-                            <div class="text-date" th:text="${question.questionRd}"></div>
+                            <div class="text-date" th:text="${#temporals.format(question.questionRd, 'yyyy-MM-dd')}"></div>
                         </div>
                         <div class="content-text">
                             <p th:text="${question.questionContent}">

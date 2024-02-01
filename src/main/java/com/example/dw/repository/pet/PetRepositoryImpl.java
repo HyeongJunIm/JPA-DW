@@ -64,7 +64,12 @@ public class PetRepositoryImpl implements PetRepositoryCustom{
         return content;
     }
 
-    // 수정을 위한 하나의 펫의 기본 정보 조회
+    /**
+     * 펫 내용 수정을 위한 해당유저의 선택 펫 조회 쿼리문
+     * @param petId
+     * @param userId
+     * @return
+     */
     @Override
     public Optional<PetDetailResultDto> findByPetIdAndUserId(Long petId, Long userId) {
         PetDto petDtos = jpaQueryFactory

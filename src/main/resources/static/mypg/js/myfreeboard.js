@@ -7,8 +7,9 @@ $(document).ready(function (){
     list.list(0,userId,'mypgs','myfreeBoardLists',showUserFreeboardList);
 
 // 리스트 클리시 세부 페이지 이동
-    $('.list-content').on('click',function (){
+    $('.list-contents-box').on('click','.list-content',function (){
         let id = $(this).data('id');
+        console.log(id);
         window.location.href = "/community/freeBoardDetail/"+id;
     })
 
@@ -20,7 +21,6 @@ function showUserFreeboardList(result) {
     let textInput = $('.list-contents-box');
 
 
-    console.log(result.length);
     if (result.content.length === 0) {
         text = `
                     <div class="nonepage">
@@ -40,8 +40,8 @@ function showUserFreeboardList(result) {
     }else{
         result.content.forEach(r => {
 
-            text += ` <div class="list-content" th:data-id="${r.id}">
-                        <div class="content-text-box">
+            text += ` <div class="list-content" data-id="${r.id}">
+                        <div class="content-text-box" >
                             <div class="list-content-title">${r.freeBoardTitle}</div>
                             <div class="list-content-content">
                                 <div class="list-content-content-detail">

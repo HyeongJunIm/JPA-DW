@@ -549,7 +549,11 @@ public class UsersRepositoryImpl implements UsersRepositoryCustom {
         return users.id.isNotNull();
     }
 
-    //마이페이지 이동시 회원 정보 가져오기
+    /**
+     * 마이페이지로 이동시 해당 유저 정보 조회
+     * @param userId
+     * @return
+     */
     @Override
     public Optional<UserDetailListDto> findOneByUserId(Long userId) {
     UserDto content = jpaQueryFactory
@@ -623,9 +627,12 @@ public class UsersRepositoryImpl implements UsersRepositoryCustom {
         return   contents;
 }
 
-// 이미지만 따로 추출
 
-
+    /**
+     * 유저 이미지 정보 조회
+     * @param userId
+     * @return
+     */
     @Override
     public List<UserFileDto> findAllByUserId(Long userId) {
         return jpaQueryFactory.select(

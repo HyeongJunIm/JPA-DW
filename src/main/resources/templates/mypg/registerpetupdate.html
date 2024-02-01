@@ -100,13 +100,13 @@
                             <div class="gender-choice">
                                 <div>
                                    <label for="gendertype-m" class="gender-box">
-                                        <input type="radio" class="genderchck-M" id="gendertype-m" name="petGender" value="M" th:checked="${petdetail.petGender == 'M'}" required>
+                                        <input type="radio" class="genderchck-M" id="gendertype-m" name="petGender" value="M" th:checked="${petdetail.petGender == 'M'}" readonly>
                                         남아
                                     </label>
                                 </div>
                                 <div>
                                     <label for="gendertype-f" class="gender-box">
-                                        <input type="radio" class="genderchck-F" id="gendertype-f" name="petGender" value="F" th:checked="${petdetail.petGender == 'F'}" required>
+                                        <input type="radio" class="genderchck-F" id="gendertype-f" name="petGender" value="F" th:checked="${petdetail.petGender == 'F'}" readonly>
                                         여아
                                     </label>
                                 </div>
@@ -114,7 +114,7 @@
                             <div class="neutering-ckeck">
                                 <div class="check-box">
                                     <label for="neuter" class="neuter-box">
-                                    <input type="checkbox" id="neuter" class="neutering" name="neutering" th:checked="${petdetail.neutering == 'Y'}" value="Y" required>
+                                    <input type="checkbox" id="neuter" class="neutering" name="neutering" th:checked="${petdetail.neutering == 'Y'}" value="Y" readonly>
                                     <span>중성화 여부</span>
                                     </label>
                                 </div>

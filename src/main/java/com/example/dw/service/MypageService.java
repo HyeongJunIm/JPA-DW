@@ -38,18 +38,21 @@ public class MypageService {
     private final OrderReviewRepository orderReviewRepository;
     private final OrderItemRepository orderItemRepository;
 
-    //회원정보 수정
+    /**
+     * 회원정보 수정 서비스
+     * @param userUpdateForm 회원 수정정보
+     * @param file 이미지 수정
+     * @return
+     * @throws IOException
+     */
     @Transactional
     public Users modify(UserUpdateForm userUpdateForm, MultipartFile file)
             throws IOException {
 
-        //수정된 메인 사진이 있다면 기존 사진 삭제 후 수정된 사진으로 업데이트
         if(!file.isEmpty()) {
             System.out.println("사진 저장");
-            //기존 사진 삭제
             fileService.removeUserImg(userUpdateForm.getId());
 
-            //새로 수정된 사진 로컬 서버 저장 및 DB저장
             fileService.registerUserImg(file, userUpdateForm.getId());
         }else{
             System.out.println("입력된 메인 사진 없음");
@@ -60,7 +63,6 @@ public class MypageService {
 
         Users users = usersRepository.findById(userUpdateForm.getId()).get();
 
-        //상품 기본 내용 업데이트
         users.update(userUpdateForm);
         return Optional.ofNullable(users).orElseThrow(()->{
             throw new IllegalArgumentException("조회 정보 없음");
@@ -80,7 +82,7 @@ public class MypageService {
     public boolean existsByUserNickName(String userNickName){return  usersRepository.existsByUserNickName(userNickName);}
 
     /**
-     * 등록된 펫 이름 중복확인
+     * 유저에게 등록된 펫 이름 중복확인
      * @param name
      * @return
      */
@@ -90,18 +92,21 @@ public class MypageService {
         return petRepository.existsByNameAndUsersId(name,userId);
     }
 
+    /**
+     * 펫의 정보를 repository 기본 메소들 활용 저장
+     * @param petForm
+     * @return
+     * @throws IOException
+     */
     @Transactional
     public Long register(PetForm petForm)throws IOException{
-
         Pet pet = petRepository.save(petForm.toEntity());
-
-
         return pet.getId();
 
     }
 
     /**
-     * 펫 정보 삭제
+     * repository 기본 메소드를 활용한 펫 정보 삭제
      * @param petId
      */
     @Transactional
@@ -113,6 +118,13 @@ public class MypageService {
 
     }
 
+    /**
+     * 펫의 새로운 정보로 수정
+     * @param petUpdateForm 새로운 펫 정보 저장소
+     * @param files 새로운 펫의 이미지 저장소
+     * @return
+     * @throws IOException
+     */
     @Transactional
     public Pet modifyPet(PetUpdateForm petUpdateForm, List<MultipartFile> files)
             throws IOException {
@@ -129,7 +141,7 @@ public class MypageService {
 
         Pet pet=petRepository.findById(petUpdateForm.getId()).get();
 
-        //상품 기본 내용 업데이트
+
         pet.update(petUpdateForm);
         return Optional.ofNullable(pet).orElseThrow(()->{
             throw new IllegalArgumentException("펫 정보 없음");

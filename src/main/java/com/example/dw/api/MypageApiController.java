@@ -113,7 +113,11 @@ public class MypageApiController {
         }
     }
 
-    //닉네임 검사
+    /**
+     * 유저정보 수정시 닉네임 중복검사
+     * @param userNickName
+     * @return
+     */
     @PostMapping("/mypgs/nickName/check")
     public boolean checkUserNickName(@RequestParam("userNickName") String userNickName) {
         if (userNickName == null) {
@@ -144,13 +148,22 @@ public class MypageApiController {
         }
     }
 
-
+    /**
+     * 비동기 통신을 통한 나의 펫 삭제
+     * @param petId 등록된 펫 id 필드
+     */
     @PostMapping("/mypgs/remove/{petId}")
     public void petInfoDelete(@PathVariable("petId") Long petId) {
         mypageService.removePet(petId);
 
     }
 
+    /**
+     * 내가 작성한 QnA리스트 목록 조회
+     * @param page
+     * @param userId
+     * @return
+     */
     @GetMapping("/mypgs/myWriteList/{page}/{userId}")
     public Page<QuestionListDto> findQnAList(
             @PathVariable("page") int page, @PathVariable("userId") Long userId) {
