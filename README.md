@@ -27,7 +27,7 @@
 
 [포폴1차.pdf](https://github.com/bokkaa/JPA-DW/files/14395778/1.pdf)
 
-## 📌 내가 맡은 기능  <a href="" >상세보기 - WIKI 이동</a>
+## 📌 내가 맡은 기능  <a href="https://github.com/HyeongJunIm/JPA-DW.wiki.git" >상세보기 - WIKI 이동</a>
 #### 마이페이지
 - 회원정보수정 및 회원탈퇴  
 - 회원 펫 추가,수정,삭제 
@@ -47,7 +47,7 @@
 
 ## 코드 수정 
 
-<details><summary>1.N+1문제 </summary>
+<details><summary>1.N+1문제</summary>
 
 -QuestionRepositoryImpl.java
 ```java
