@@ -22,6 +22,24 @@
 - **Framework** : Springboot(3.x)
 - **Database** : Oracle DB(11xe)
 - **ORM** : JPA
+- 
+## 🧷페이지 흐름도
+<details open>
+<summary>페이지 흐름도</summary>
+<img src='https://github.com/NohEuijin/JPA-DW/assets/141835418/2840096d-a01d-4065-8635-74585a91c089' border='0'>
+<img src='https://github.com/NohEuijin/JPA-DW/assets/141835418/a0b9f8a9-d5e3-48a8-9afa-8a12c4837ee0' border='0'>
+</details>
+
+## 🧷ERD구성
+
+<details open>
+<summary>ERD</summary>
+  
+<a href='https://github.com/NohEuijin/JPA-DW/assets/141835418/c46f7e89-697f-4b4b-bda2-7ec5481f3248' target='_blank'>
+<img src='https://github.com/NohEuijin/JPA-DW/assets/141835418/c46f7e89-697f-4b4b-bda2-7ec5481f3248' border='0'>
+</a>
+
+</details>
 
 ### 포트폴리오 
 
