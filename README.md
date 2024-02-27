@@ -22,7 +22,7 @@
 - **Framework** : Springboot(3.x)
 - **Database** : Oracle DB(11xe)
 - **ORM** : JPA
-- 
+
 ## 🧷페이지 흐름도
 <details open>
 <summary>페이지 흐름도</summary>
