@@ -43,7 +43,8 @@
 
 ### 포트폴리오 
 
-[포폴1차.pdf](https://github.com/bokkaa/JPA-DW/files/14395778/1.pdf)
+[산책할개_포트폴리오.pdf](https://github.com/HyeongJunIm/JPA-DW/files/14518709/_.pdf)
+
 
 ## 📌 내가 맡은 기능  <a href="https://github.com/HyeongJunIm/JPA-DW/wiki" >상세보기 - WIKI 이동</a>
 #### 마이페이지
